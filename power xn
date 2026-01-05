@@ -1,0 +1,22 @@
+class Solution {
+    public double recursion(double a , int b){
+        if(b==0) return 1;
+        if(b==1) return a;
+
+        double ans = recursion(a , b/2);
+       
+
+        if(b%2==0){
+           return ans*ans;
+        }
+        
+            return a*ans*ans;
+    }
+    public double myPow(double x, int n) {
+        if(n<0){
+            x = 1/x;
+            n = -n;
+        }
+        return recursion(x,n);
+    }
+}
