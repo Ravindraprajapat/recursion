@@ -21,3 +21,21 @@ class Solution {
         return ans;
     }
 }
+
+
+📊 FULL COMBINED CALL STACK TREE (EXACT FORMAT)
+subset([],0)
+├─ subset([1],1)
+│  ├─ subset([1,2],2)
+│  │  ├─ subset([1,2,3],3)  ✔ return
+│  │  └─ subset([1,2],3)    ✔ return
+│  └─ subset([1],2)
+│     ├─ subset([1,3],3)    ✔ return
+│     └─ subset([1],3)      ✔ return
+└─ subset([],1)
+   ├─ subset([2],2)
+   │  ├─ subset([2,3],3)    ✔ return
+   │  └─ subset([2],3)      ✔ return
+   └─ subset([],2)
+      ├─ subset([3],3)      ✔ return
+      └─ subset([],3)       ✔ return
