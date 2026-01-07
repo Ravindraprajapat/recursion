@@ -1,0 +1,39 @@
+class Solution {
+
+     void swap(int nums[] ,int i ,int j){
+        int temp = nums[i];
+        nums[i]=nums[j];
+        nums[j]=temp;
+     }
+
+    void permute(int nums[] ,List<List<Integer>> ans , int index ){
+        if(index >= nums.length){
+            List<Integer> list = new ArrayList<>();
+            for(int num : nums){
+                list.add(num);
+            }
+            ans.add(list);
+            return;
+        }
+
+         HashSet<Integer> used = new HashSet<>();
+
+        for(int j=index;j<nums.length;j++){
+            if (used.contains(nums[j])) continue; // skip duplicate
+              used.add(nums[j]);
+                swap(nums,index,j);
+            permute(nums,ans,index+1);
+             swap(nums,index,j); // backTracking back orignal place for further permutation
+            
+           
+        }
+    }
+
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        Arrays.sort(nums);
+         List<List<Integer>> ans = new ArrayList<>();
+         int index =0;
+         permute(nums,ans,index);
+         return ans;
+    }
+}
