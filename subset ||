@@ -1,0 +1,29 @@
+class Solution {
+    List<List<Integer>> ans = new ArrayList<>();
+
+    void subset(int[] nums, List<Integer> temp, int index) {
+
+        if (index >= nums.length) {
+            if(!ans.contains(temp)){
+            ans.add(new ArrayList<>(temp));
+            }
+            return;
+        }
+
+        int ele = nums[index];
+        // phele element ko include
+        temp.add(ele);
+        subset(nums, temp, index + 1);
+
+        temp.remove(temp.size() - 1); // backtrack
+        subset(nums, temp, index + 1);
+    }
+
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        List<Integer> temp = new ArrayList<>();
+        int index = 0;
+        subset(nums, temp, index);
+        return ans;
+    }
+}
