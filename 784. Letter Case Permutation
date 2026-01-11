@@ -1,0 +1,56 @@
+class Solution {
+    List<String> ans = new ArrayList<>();
+
+    void solve(char[] ch, int index) {
+        if (index >= ch.length) {
+            ans.add(new String(ch));
+            return;
+        }
+
+        solve(ch, index + 1);
+        if (ch[index] >= 'a' && ch[index] <= 'z') {
+            char c = ch[index];
+            char upper = (char) (c - 32);
+            ch[index] = upper;
+            solve(ch, index + 1);
+            ch[index] = c;
+        } else if (ch[index] >= 'A' && ch[index] <= 'Z') {
+            char c = ch[index];
+            char lower = (char) (c + 32);
+            ch[index] = lower;
+            solve(ch, index + 1);
+            ch[index] = c;
+        }
+
+    }
+
+    public List<String> letterCasePermutation(String s) {
+        char ch[] = new char[s.length()];
+        for (int i = 0; i < s.length(); i++) {
+            ch[i] = s.charAt(i);
+        }
+        solve(ch, 0);
+        return ans;
+    }
+}
+
+
+solve("a1b", 0)
+                         |
+               -----------------------
+              |                       |
+        keep 'a'                 change 'a'→'A'
+              |                       |
+        solve("a1b",1)           solve("A1b",1)
+              |                       |
+           '1' (digit)             '1' (digit)
+              |                       |
+        solve("a1b",2)           solve("A1b",2)
+              |                       |
+         ----------------         ----------------
+        |                |       |                |
+   keep 'b'         change 'b' keep 'b'        change 'b'
+        |                |       |                |
+ solve("a1b",3)   solve("a1B",3) solve("A1b",3) solve("A1B",3)
+        |                |       |                |
+     "a1b"            "a1B"    "A1b"             "A1B"
